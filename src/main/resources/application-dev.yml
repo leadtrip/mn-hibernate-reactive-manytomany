@@ -1,0 +1,19 @@
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5434/postgres
+    username: hibreac
+    password: hibreac
+    driver-class-name: org.postgresql.Driver
+    db-type: postgres
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        connection:
+          url: ${datasources.default.url}
+          username: ${datasources.default.username}
+          password: ${datasources.default.password}
+    reactive: true

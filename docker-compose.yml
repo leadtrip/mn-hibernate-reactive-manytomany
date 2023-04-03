@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  database:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_USER=hibreac
+      - POSTGRES_PASSWORD=hibreac
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5

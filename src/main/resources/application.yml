@@ -1,0 +1,22 @@
+micronaut:
+  application:
+    name: mnHibernateReactiveManyToMany
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+#vertx:
+#  pg:
+#    client:
+#      port: 5434
+#      host: localhost
+#      database: postgres
+#      user: hibreac
+#      password: hibreac
+#      maxSize: 5

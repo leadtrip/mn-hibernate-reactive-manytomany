@@ -1,0 +1,16 @@
+datasources:
+  default:
+    db-type: postgres
+
+jpa:
+  default:
+    entity-scan:
+      classpath: true
+    properties:
+      hibernate:
+        show-sql: true
+        hbm2ddl:
+          auto: none
+        connection:
+          db-type: postgres
+    reactive: true
