@@ -4,14 +4,12 @@ import example.micronaut.commands.BookCreateCommand;
 import example.micronaut.commands.BookUpdateCommand;
 import example.micronaut.domain.Book;
 import example.micronaut.services.BookService;
-import io.micronaut.data.model.Pageable;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
 
 @Controller("/books")
@@ -40,8 +38,8 @@ public class BookController {
     }
 
     @Get("/list")
-    public Mono<List<Book>> list(@Valid Pageable pageable) {
-        return bookService.list(pageable);
+    public Flux<Book> list() {
+        return bookService.list();
     }
 
     @Post

@@ -11,20 +11,6 @@ import java.util.stream.Collectors;
 @Singleton
 public class BookTransformer {
 
-    private final GenreRepository genreRepository;
-
-    public BookTransformer(GenreRepository genreRepository) {
-        this.genreRepository = genreRepository;
-    }
-
-    public Book fromUpdateCommand(BookUpdateCommand bookUpdateCommand) {
-        Book book = new Book();
-        book.setId(bookUpdateCommand.getId());
-        book.setName(bookUpdateCommand.getName());
-        book.setGenres(bookUpdateCommand.getGenres().stream().map(genreId -> genreRepository.findById(genreId).block()).collect(Collectors.toSet()));
-        return book;
-    }
-
     public Book fromUpdateCommandJustId(BookUpdateCommand bookUpdateCommand) {
         Book book = new Book();
         book.setId(bookUpdateCommand.getId());

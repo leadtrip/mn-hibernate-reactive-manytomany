@@ -1,6 +1,7 @@
-datasources:
-  default:
-    db-type: postgres
+flyway:
+  datasources:
+    default:
+      enabled: false
 
 jpa:
   default:
@@ -10,7 +11,7 @@ jpa:
       hibernate:
         show-sql: true
         hbm2ddl:
-          auto: none
+          auto: update
         connection:
           db-type: postgres
     reactive: true

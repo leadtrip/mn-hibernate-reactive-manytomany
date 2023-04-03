@@ -21,7 +21,7 @@ public class Book {
         this.genres = genres;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "book_genre",
             joinColumns = @JoinColumn(name = "book_id"),
