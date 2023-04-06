@@ -152,7 +152,6 @@ public class BookControllerTest {
 
         // this is failing I think because @Transactional is needed on the BookRepository updateGenres method but then the update fails above with
         // 'No reactive transaction management has been configured. Ensure you have correctly configured a reactive capable transaction manager'
-
         //assertEquals( totalGenres, fetchedBook.getGenres().size());
     }
 

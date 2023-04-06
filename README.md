@@ -5,7 +5,18 @@
 * Postgres
 * Test resources
 
-Primarily created to test ManyToMany handling with no cascade option set.
+Primarily created to test ManyToMany handling with no cascade option set because I only want the book and join table book_genre to be managed by hibernate.
+This does not work at present, I am able to create a book and genres together but any updates that involve adding a new genre fail with:
+
+`org.hibernate.HibernateException: java.util.concurrent.CompletionException: org.hibernate.reactive.event.impl.UnexpectedAccessToTheDatabase: Unexpected access to the database`
+
+The BookControllerTest demonstrates this, you can also fire up a postgres DB with docker compose and test with the requests below.
+
+If I add a cascade type of say @ManyToMany(cascade = CascadeType.MERGE) to the Book genres relation updates do work but I have to fetch the entire Genre entity from the database before updating when the API allows only IDs to be specified.
+
+This all works fine with non-reactive hibernate see - https://github.com/leadtrip/mn-hib-data-jpa
+
+
 
 `curl --location 'http://localhost:8080/genres/list'`
 

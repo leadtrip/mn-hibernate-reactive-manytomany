@@ -9,6 +9,7 @@ import io.micronaut.data.repository.reactive.ReactorCrudRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.UUID;
@@ -26,6 +27,7 @@ public interface BookRepository extends ReactorCrudRepository<Book, UUID> {
     @NonNull
     Flux<Book> findAll();
 
+    @Transactional
     @EntityGraph( attributePaths = {"genres"})
     default Mono<Book> updateGenres(UUID id, Set<Genre> genres) {
         return findById(id).map( book -> {

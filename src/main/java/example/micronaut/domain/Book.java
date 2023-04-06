@@ -21,7 +21,8 @@ public class Book {
         this.genres = genres;
     }
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    //@ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany     // I ONLY WANT HIBERNATE TO MANAGE THE BOOK AND JOIN TABLE SO NO CASCADE OPTION IS SET BUT THIS DOESN'T WORK WHEN UPDATING WITH GENERES THAT AREN'T CURRENTLY MAPPED I.E. NEED TO BE INSERTED INTO THE JOIN TABLE
     @JoinTable(
             name = "book_genre",
             joinColumns = @JoinColumn(name = "book_id"),
