@@ -7,6 +7,7 @@ import jakarta.inject.Singleton;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.transaction.Transactional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -36,17 +37,9 @@ public class BookService {
         return bookRepository.save(bookTransformer.fromCreateCommand(bookCreateCommand));
     }
 
+    @Transactional
     public Mono<Book> update( BookUpdateCommand bookUpdateCommand ) {
-
-        return genreRepository.findAllByIdIn(bookUpdateCommand.getGenres()).collectList()
-                .map(genres -> {
-                    Book book = bookTransformer.fromUpdateCommandJustId(bookUpdateCommand);
-                    book.setGenres(Set.copyOf(genres));
-                    return book;
-                })
-                .flatMap(bookRepository::update);
-
-        //return bookRepository.update(bookTransformer.fromUpdateCommandJustId(bookUpdateCommand));
+        return bookRepository.update(bookTransformer.fromUpdateCommandJustId(bookUpdateCommand));
     }
 
     public Mono<Book> updateGenres( BookUpdateCommand bookUpdateCommand ) {
